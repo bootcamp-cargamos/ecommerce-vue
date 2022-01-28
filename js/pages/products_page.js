@@ -88,6 +88,12 @@ export default Vue.component("products", {
         <search-input  :onKeyup="onSearchKeyup"/>
 
         <product-list :products="products"/>
+
+          <div class="container fixed-bottom pb-2 bg-white">
+          <button class="btn btn-primary w-100 py-3 fw-bold">
+            <i class="bi bi-plus-circle"></i> Nuevo producto
+          </button>
+        </div>
       </div>  
     `,
 });

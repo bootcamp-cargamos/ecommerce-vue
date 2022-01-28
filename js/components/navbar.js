@@ -1,3 +1,7 @@
+/* Component: Navbar 
+   Contiene la barra de navegación 
+   así como los link de acceso a otras paginas */
+
 import STORAGE from "../utils/storage.js";
 
 export default Vue.component("navbar", {
@@ -5,17 +9,26 @@ export default Vue.component("navbar", {
   data: function () {
     return {
       username: "",
-      password: "",
-      isLogged: !(STORAGE.get("token") == null),
-    };
+      password: "", 
+    }
   },
+    computed: {
+      /* Genera una variable autocalculable 
+      que determina si exite un token 
+      lo que significa que el usuario esá loggado*/
+      isLogged() {
+        return !(STORAGE.get("token") == null);
+      },
+    },
   methods: {
     goLogin() {
-      this.$router.push("home");
+      // Redirige al usuario al listado de productos
+      this.$router.push("products");
     },
     logout() {
+      // Eliminamos el token de sesión
       STORAGE.remove("token");
-      location.replace("/");
+      location.replace("/#/");
     },
   },
   template: `

@@ -4,8 +4,8 @@ import STORAGE from "../utils/storage.js";
 export default Vue.component("login-page", {
   data: function () {
     return {
-      username: "cargamos",
-      password: "c4rg4m0s",
+      username: "", 
+      password: "",
     };
   },
   methods: {
@@ -20,7 +20,7 @@ export default Vue.component("login-page", {
         // Almacenamos el token si el inicio de sesión es correcto
         STORAGE.set("token", response.token);
         // Redirigimos al usuario al home
-        vm.$router.push("home");
+        vm.$router.push("products");
       } catch (e) {
         //En caso haya un error en el inicio de sesión
         // Notificamos por consola el incidente

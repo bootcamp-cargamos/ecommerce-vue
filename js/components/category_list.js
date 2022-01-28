@@ -7,8 +7,8 @@ export default Vue.component("category-list", {
     return {};
   },
   methods: {
-    editCategory() {
-      this.$router.push("/products/edit");
+    editCategories() {
+      this.$router.push("/categories");
     },
   },
   mounted: function () {},
@@ -17,6 +17,7 @@ export default Vue.component("category-list", {
     <button
       class="btn btn-dark rounded-circle"
       style="height: 42px; width: 42px"
+      @click.prevent="editCategories"
     >
       <i class="bi bi-pencil"></i>
     </button>

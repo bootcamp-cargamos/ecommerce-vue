@@ -1,3 +1,6 @@
+/* Component: Loader 
+   Genera una imagen animada temporal cuando se esta realizando
+   una tarea asincrona */
 export default Vue.component("navbar", {
   props: [],
   data: function () {

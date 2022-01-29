@@ -9,27 +9,30 @@ export default Vue.component("navbar", {
   data: function () {
     return {
       username: "",
-      password: "", 
-    }
+      password: "",
+      isLogged: false,
+    };
   },
-    computed: {
-      /* Genera una variable autocalculable 
-      que determina si exite un token 
-      lo que significa que el usuario esá loggado*/
-      isLogged() {
-        return !(STORAGE.get("token") == null);
-      },
-    },
   methods: {
     goLogin() {
+      this.$router.push("/");
+    },
+    goRegister() {
       // Redirige al usuario al listado de productos
-      this.$router.push("products");
+      this.$router.push("register");
     },
     logout() {
       // Eliminamos el token de sesión
       STORAGE.remove("token");
-      location.replace("/#/");
+      this.$router.push("/");
     },
+  },
+  mounted() {},
+  created: function () {
+    // Validamos el cambio en el Local Storage
+    setInterval(() => {
+      this.isLogged = !(STORAGE.get("token") == null);
+    }, 1000);
   },
   template: `
   <nav class="navbar navbar-dark bg-dark sticky-top">
@@ -69,7 +72,7 @@ export default Vue.component("navbar", {
         <button type="button" @click="goLogin" class="btn btn-link px-3 me-2 text-decoration-none">
           Inicia Sesión
         </button>
-        <button type="button" class="btn btn-primary me-3">
+        <button @click.prevent="goRegister" type="button" class="btn btn-primary me-3">
           Registrate
         </button>
       </div>

@@ -4,7 +4,7 @@ import STORAGE from "../utils/storage.js";
 export default Vue.component("login-page", {
   data: function () {
     return {
-      username: "", 
+      username: "",
       password: "",
     };
   },
@@ -27,6 +27,10 @@ export default Vue.component("login-page", {
         console.warn(e);
         alert("Error al iniciar sesión");
       }
+    },
+    goRegister() {
+      // Redirige al usuario al listado de productos
+      this.$router.push("register");
     },
   },
   created: function () {
@@ -74,7 +78,7 @@ export default Vue.component("login-page", {
     <div class="col-12 text-center">
         ¿Aun no tienes una cuenta? 
         </br>
-        <a class="ms-2 text-dark fw-bold">REGÍSTRATE AHORA</a>
+        <a href="#" @click.prevent="goRegister" class="ms-2 text-dark fw-bold">REGÍSTRATE AHORA</a>
     </div>
     </div>
     `,

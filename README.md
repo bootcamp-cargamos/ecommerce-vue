@@ -15,7 +15,7 @@ Se debe desarrollar una pagina web de acuerdo a los prototipos
 
 URL : [Link de prototipos](https://www.figma.com/proto/KfvXzfkC7NVBSo1CQAYA7E/APP-ECOMMERCE?page-id=0%3A1&node-id=58%3A2961&viewport=344%2C48%2C0.58&scaling=scale-down&starting-point-node-id=58%3A2961)
 
-![ejercicio](https://serving.photos.photobox.com/3479262723e48fb65f820d54f0ff551a7af5e27ece6d501836b4a60fe95c3a9e2f7f6ddf.jpg)
+![ejercicio](/assets/prototipos.png)
 <br><br>
 
 # 📂 Estructura del proyecto
@@ -72,6 +72,8 @@ URL : [Link de prototipos](https://www.figma.com/proto/KfvXzfkC7NVBSo1CQAYA7E/AP
 
 URL : http://silabuz-api-project.herokuapp.com
 
+Fully Docs : http://silabuz-api-project.herokuapp.com/swagger/
+
 The REST API for Silabuz Products Api
 
 ## Login session
@@ -80,19 +82,19 @@ Login user session platform
 
 #### Request
 
-`POST /authentication/login`
+`POST /authentication/login/`
 
     URL:            '/authentication/login/'
     HEADERS:        'Accept: application/json'
 
 | Attribute | Description           |
 | --------- | --------------------- |
-| username  | User email access     |
+| username  | username              |
 | password  | PAssword email access |
 
     {
-        "email": "admin@silabuz.com",
-        "password": "VN^U9o@D3gMf"
+        "username": "cargamos",
+        "password": "c4rg4m0s"
     }
 
 ## Register
@@ -101,7 +103,7 @@ Register platform
 
 #### Request
 
-`POST /authentication/sign-up`
+`POST /authentication/sign-up/`
 
     URL:            '/authentication/sign-up/'
     HEADERS:        'Accept: application/json'
@@ -119,10 +121,10 @@ Create category
 
 #### Request
 
-`GET /api/user`
+`GET /api/products/categories/`
 
     URL:            '/products/categories/'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 | Attribute | Description    |
 | --------- | -------------- |
@@ -130,24 +132,24 @@ Create category
 
 ## Category Read
 
-Get list of category
+Get list of category (Required authentication)
 
 #### Request
 
-`GET /products/categories`
+`GET /products/categories/`
 
-    URL:            'products/categoriesç7'
-    HEADERS:        'Accept: application/json'
+    URL:            'products/categories/'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 `GET products/categories/?name={CATEGORYNAMEhere}`
 
     URL:            'products/categories/?name={CATEGORYNAMEhere}'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
-`GET products/categories/?search={KEYWORDher}`
+`GET products/categories/?search={KEYWORDhere}`
 
-    URL:            'products/categories/?search={KEYWORDher}'
-    HEADERS:        'Accept: application/json'
+    URL:            'products/categories/?search={KEYWORDhere}'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 ## Category UPDATE
 
@@ -158,7 +160,7 @@ Category data update
 `PUT products/categories/IDhere/`
 
     URL:            'products/categories/{IDhere}/'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 | Attribute     | Description   |
 | ------------- | ------------- |
@@ -173,6 +175,7 @@ Delete category
 `DELETE products/categories/{IDhere}/`
 
     URL:            'products/categories/{IDhere}/'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -184,19 +187,20 @@ Create product
 
 #### Request
 
-`POST /products/product`
+`POST /products/products/`
 
-    URL:            '/products/product/'
-    HEADERS:        'Accept: application/json'
+    URL:            '/products/products/'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
-| Attribute      | Description         |
-| -------------- | ------------------- |
-| name           | product name        |
-| category_id    | category ID         |
-| description    | product description |
-| price          | price product       |
-| discount_price | discount price      |
-| image          | url image           |
+| Attribute      | Description           |
+| -------------- | --------------------- |
+| name           | product name          |
+| category_id    | category ID           |
+| description    | product description   |
+| price          | price product         |
+| discount_price | discount price        |
+| image_url      | url image             |
+| is_active      | is available in stock |
 
 ## Product Read
 
@@ -207,22 +211,22 @@ Get list of products
 `GET /products/products/`
 
     URL:            'products/products/'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 `GET products/products/?name={PRODUCTNAMEhere}`
 
     URL:            'products/categories/?name={PRODUCTNAMEhere}'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 `GET products/products/?category={CATEGORYIDhere}`
 
     URL:            'products/categories/?search={CATEGORYIDhere}'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
-`GET products/products/?category\_\_name={CATEGORYNAMEhere}`
+`GET products/products/?category__name={CATEGORYNAMEhere}`
 
-    URL:            'products/products/?category\_\_name={CATEGORYNAMEhere}'
-    HEADERS:        'Accept: application/json'
+    URL:            'products/products/?category__name={CATEGORYNAMEhere}'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 ## Product UPDATE
 
@@ -233,7 +237,7 @@ Product data update
 `PUT products/products/IDhere/`
 
     URL:            'products/products/{IDhere}/'
-    HEADERS:        'Accept: application/json'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 | Attribute      | Description         |
 | -------------- | ------------------- |
@@ -250,9 +254,10 @@ Delete Product
 
 #### Request
 
-`DELETE products/products/IDhere/`
+`DELETE products/products/{IDhere}/`
 
     URL:            'products/products/{IDhere}/'
+    HEADERS:        'Accept: application/json , Authorization: Token {UserToken}'
 
 | Attribute | Description |
 | --------- | ----------- |

@@ -60,7 +60,7 @@ export default Vue.component("categories-page", {
         await CLIENT.request("POST", url, {name:vm.new_category} );
         // Cargamos las categorias
         await vm.getCategories()
-
+        vm.new_category = "";
 
       } catch (e) {
         alert("Upps hubo un error: " + e.message);

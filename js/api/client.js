@@ -7,6 +7,7 @@ const headers = {
 const CLIENT = {
   get: async (path) => {
     // 1. Hacer Peticion
+    console.log(headers);
     const response = await fetch(URL + path,{
       method: "GET",
       headers});

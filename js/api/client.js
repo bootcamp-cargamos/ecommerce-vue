@@ -1,16 +1,17 @@
 import STORAGE from "../utils/storage.js";
 const URL = "https://silabuz-api-project.herokuapp.com";
-
+const generateHeaders = ()=>{
+  return {
+    "Content-Type": "application/json",
+    Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
+  }
+}
 const CLIENT = {
   get: async (path) => {
     // 1. Hacer Peticion
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
-    }
     const response = await fetch(URL + path,{
       method: "GET",
-      headers});
+      headers: generateHeaders()});
     // Validar la respuesta
     if (!response.ok) throw Error(response.statusText);
     // Extraer la información
@@ -21,7 +22,7 @@ const CLIENT = {
     // 1. Hacer Peticion
     const response = await fetch(URL + path, {
       method: "POST",
-      headers,
+      headers:generateHeaders(),
       body: JSON.stringify(data),
     });
     // Validar la respuesta
@@ -36,7 +37,7 @@ const CLIENT = {
     // 1. Hacer Peticion
     const response = await fetch(URL + path, {
       method: method,
-      headers,
+      headers:generateHeaders(),
       body: JSON.stringify(data),
     });
     // Validar la respuesta

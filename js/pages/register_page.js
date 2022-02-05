@@ -112,8 +112,8 @@ export default Vue.component("register-page", {
       <div class="d-flex justify-content-center py-4">
         <label for=""
           >¿Ya tienes una cuenta?
-          <a class="fw-bold text-dark" href="#" @click.prevent="goLogin"> INICIA SESIÓN</a></label
-        >
+          <a class="fw-bold text-dark" href="#" @click.prevent="goLogin"> INICIA SESIÓN</a>
+        </label>
       </div>
     </div>
       `,

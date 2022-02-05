@@ -11,10 +11,19 @@ export default Vue.component("navbar", {
       username: "",
       password: "",
       isLogged: false,
+      current_path: false,
     };
+  },
+  computed: {
+    isRoot() {
+      return this.current_path == '/products' || this.current_path == '/'
+    },
   },
   methods: {
     goLogin() {
+      this.$router.push("/");
+    },
+    goBack() {
       this.$router.push("/");
     },
     goRegister() {
@@ -32,6 +41,7 @@ export default Vue.component("navbar", {
     // Validamos el cambio en el Local Storage
     setInterval(() => {
       this.isLogged = !(STORAGE.get("token") == null);
+      this.current_path = this.$router.history.current.path
     }, 1000);
   },
   template: `
@@ -39,13 +49,22 @@ export default Vue.component("navbar", {
   <!-- Container wrapper -->
   <div class="container-fluid py-2">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+    <a  class="navbar-brand me-2" 
+        v-if="isRoot"
+        href="#">
       <img
         src="./assets/logo.png"
         alt="MDB Logo"
         loading="lazy"
         style="margin-top: -1px"
       />
+    </a>
+
+    <a  v-else 
+        class="navbar-brand me-2"
+        href=""
+        @click.prevent="goLogin">
+    <i class="bi bi-chevron-left"></i> Regresar
     </a>
 
     <!-- Toggle button -->

@@ -51,7 +51,7 @@ export default Vue.component("product-item", {
             {{product.category.name}}
           </span>
         </div>
-        <h5 class="mt-2">{{product.name}}</h5>
+        <h6 class="mt-2">{{product.name}}</h6>
         <!-- Si el producto tiene descuento se
          añade el precio sin descuento (tachado) -->
         <small v-if="hasDiscount"

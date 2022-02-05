@@ -13,10 +13,6 @@ export default Vue.component("products", {
       loading: true,
       search: "",
       current_category: {},
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Token " + STORAGE.get("token"),
-      },
     };
   },
   methods: {
@@ -34,7 +30,7 @@ export default Vue.component("products", {
         url += "&category=" + vm.current_category.pk;
       }
       //Enviamos la petición Via GET
-      const response = await CLIENT.get(url, vm.headers);
+      const response = await CLIENT.get(url);
       // Almacenamos el token si el inicio de sesión es correcto
       vm.products = response.sort((a, b) => {
         return b.discount_price - a.discount_price;
@@ -46,8 +42,7 @@ export default Vue.component("products", {
 
       //Enviamos la petición Via GET
       const response = await CLIENT.get(
-        "/products/categories/",
-        vm.headers
+        "/products/categories/"
       );
       // Cargamos las categorias 
       vm.categories = response;

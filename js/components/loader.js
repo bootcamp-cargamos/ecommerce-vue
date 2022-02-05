@@ -10,7 +10,7 @@ export default Vue.component("navbar", {
   template: `
     <div class="d-flex flex-column justify-content-center align-items-center"
          style="min-height: 90vh">
-        <img src="assets/loading.gif" width="100" alt="" />
+        <img src="assets/loading.gif" loop="infinite" width="100" alt="" />
         <small>Cargando...</small>
     </div>
     `,

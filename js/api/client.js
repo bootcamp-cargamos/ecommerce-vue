@@ -1,13 +1,13 @@
 import STORAGE from "../utils/storage.js";
 const URL = "https://silabuz-api-project.herokuapp.com";
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
-}
+
 const CLIENT = {
   get: async (path) => {
     // 1. Hacer Peticion
-    console.log(headers);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
+    }
     const response = await fetch(URL + path,{
       method: "GET",
       headers});

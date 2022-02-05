@@ -64,6 +64,10 @@ export default Vue.component("products", {
       // Actualizamos la lista de productos
       await this.getProducts();
     },
+    newProduct(){
+      STORAGE.remove("product");
+      this.$router.push("products/edit")
+    }
   },
   created: async function () {
     let vm = this;
@@ -83,14 +87,15 @@ export default Vue.component("products", {
   template: `
       <loader v-if="loading"></loader>
       
-      <div v-else>
+      <div class="mb-5 pb-5" v-else>
         <category-list :categories="categories" :current="current_category.name" :setCategory="setCategory"/>
         <search-input  :onKeyup="onSearchKeyup"/>
 
         <product-list :products="products"/>
 
-          <div class="container fixed-bottom pb-2 bg-white">
-          <button class="btn btn-primary w-100 py-3 fw-bold">
+        <div class="container fixed-bottom py-2 bg-white">
+          <button class="btn btn-primary w-100 py-3 fw-bold"
+                  @click.prevent="newProduct">
             <i class="bi bi-plus-circle"></i> Nuevo producto
           </button>
         </div>

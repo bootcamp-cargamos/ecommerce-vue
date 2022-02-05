@@ -3,6 +3,8 @@ export default Vue.component("categories-page", {
     return {};
   },
   methods: {
+
+
     goProductsList() {
       this.$router.push("/products");
     },

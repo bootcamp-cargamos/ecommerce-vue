@@ -1,11 +1,13 @@
-const URL = "http://silabuz-api-project.herokuapp.com";
-
+import STORAGE from "../utils/storage.js";
+const URL = "https://silabuz-api-project.herokuapp.com";
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
+}
 const CLIENT = {
-  get: async (path, headers = {}) => {
+  get: async (path,head) => {
     // 1. Hacer Peticion
-    const response = await fetch(URL + path, {
-      headers,
-    });
+    const response = await fetch(URL + path,{headers});
     // Validar la respuesta
     if (!response.ok) throw Error(response.statusText);
     // Extraer la información
@@ -16,13 +18,31 @@ const CLIENT = {
     // 1. Hacer Peticion
     const response = await fetch(URL + path, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify(data),
     });
     // Validar la respuesta
-    if (!response.ok) throw Error(response.statusText);
+    if (!response.ok) 
+      return response.text().then(text => { throw new Error(text) })
+   
+    // Extraer la información
+    const json = await response.json();
+    return json;
+  },
+  request: async (method,path,data={}) => {
+    // 1. Hacer Peticion
+    const response = await fetch(URL + path, {
+      method: method,
+      headers,
+      body: JSON.stringify(data),
+    });
+    // Validar la respuesta
+    if (!response.ok) 
+      return response.text().then(text => { throw new Error(text) })
+
+    // El metodo delete no devuelve ningun valor
+    if(method == 'DELETE') return;
+
     // Extraer la información
     const json = await response.json();
     return json;

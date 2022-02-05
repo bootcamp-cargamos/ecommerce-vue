@@ -2,6 +2,9 @@ const STORAGE = {
   get: (key) => {
     return localStorage.getItem(key);
   },
+  has: (key) => {
+    return localStorage.getItem(key)!=null;
+  },
   set: (key, value) => {
     localStorage.setItem(key, value);
   },

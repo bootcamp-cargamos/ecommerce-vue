@@ -1,3 +1,5 @@
+import STORAGE from "../utils/storage.js";
+
 export default Vue.component("product-item", {
   props: ["product"],
   data: function () {
@@ -12,7 +14,9 @@ export default Vue.component("product-item", {
   },
   methods: {
     /* Redirige al usuario a la pagina de edición de producto */
-    editProduct() {
+    editProduct(item) {
+      STORAGE.remove("product");
+      STORAGE.setArray("product",item)
       this.$router.push("/products/edit");
     },
   },
@@ -52,13 +56,13 @@ export default Vue.component("product-item", {
          añade el precio sin descuento (tachado) -->
         <small v-if="hasDiscount"
               class="text-decoration-line-through">
-          Antes : {{product.price}}
+          Antes :  {{'$'+product.price}}
         </small>
         <!-- Si el producto tiene descuento se
          cambia el color de texto a rojo -->
         <p class="fw-bold mb-1"
            :class="hasDiscount?'text-danger':''">
-          {{hasDiscount ? product.discount_price : product.price}}
+         $ {{hasDiscount ? product.discount_price : product.price}}
         </p>
       </div>
     </div>
@@ -66,7 +70,7 @@ export default Vue.component("product-item", {
         <!-- Botón que redirige al usuario 
         a la página de edición de producto-->
     <div class="col-3 d-flex justify-content-center align-items-center">
-      <button @click.prevent="editProduct"   class="btn btn-outline-dark">Editar</button>
+      <button @click.prevent="editProduct(product)"   class="btn btn-outline-dark">Editar</button>
     </div>
   </div>
 </a>

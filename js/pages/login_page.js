@@ -46,11 +46,11 @@ export default Vue.component("login-page", {
     <div class="col-12 mt-2">
         <form>
         <div class="form-group">
-            <label for="username">Correo electronico</label>
+            <label for="username">Nombre de usuario</label>
             <input
             type="text"
             class="form-control"
-            placeholder="jhondoe@mail.com"
+            placeholder="jhondoe123"
             id="username"
             v-model="username"
             />

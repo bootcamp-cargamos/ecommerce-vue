@@ -5,9 +5,11 @@ const headers = {
   Authorization: STORAGE.has("token")? "Token " + STORAGE.get("token"):'',
 }
 const CLIENT = {
-  get: async (path,head) => {
+  get: async (path) => {
     // 1. Hacer Peticion
-    const response = await fetch(URL + path,{headers});
+    const response = await fetch(URL + path,{
+      method: "GET",
+      headers});
     // Validar la respuesta
     if (!response.ok) throw Error(response.statusText);
     // Extraer la información
